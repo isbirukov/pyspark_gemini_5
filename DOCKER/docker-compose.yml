@@ -1,0 +1,20 @@
+services:
+  pyspark_notebook:
+    image: jupyter/pyspark-notebook:latest # Образ с PySpark 3.5.0, Scala, и JupyterLab
+    container_name: pyspark_senior_de_lab
+    ports:
+      - "8888:8888" # Порт для JupyterLab
+      - "4040:4040" # Порт для Spark UI (Важно для Модуля 9 и 10!)
+    volumes:
+      - ../:/home/jovyan/workspace # Монтируем корневую папку проекта внутрь контейнера
+    environment:
+      # Настройка ресурсов Spark
+      SPARK_DRIVER_MEMORY: 4G
+      SPARK_EXECUTOR_MEMORY: 4G
+      SPARK_EXECUTOR_CORES: 2
+      SPARK_EXECUTOR_INSTANCES: 3
+      # Общий объем памяти для работы
+      PYSPARK_SUBMIT_ARGS: "--conf spark.driver.memory=4g --conf spark.executor.memory=4g --conf spark.executor.cores=2 --conf spark.executor.instances=3 --conf spark.sql.shuffle.partitions=8 pyspark-shell"
+    user: root # Запускаем от root, чтобы избежать проблем с правами на запись в смонтированные тома
+    command: start-notebook.sh --NotebookApp.token='' # No password for local de
+    restart: always

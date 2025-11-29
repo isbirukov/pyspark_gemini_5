@@ -1,0 +1,14 @@
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+# Data files
+*.parquet
+*.orc
+*.csv
+# Spark Logs and Temp
+spark-events/
+/tmp/
+# Python artifacts
+__pycache__/
+*.pyc
+# Docker environment
+.env
