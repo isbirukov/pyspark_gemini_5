@@ -4,6 +4,7 @@
 *.parquet
 *.orc
 *.csv
+data/
 # Spark Logs and Temp
 spark-events/
 /tmp/
